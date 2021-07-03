@@ -1,6 +1,13 @@
 import Foundation
 import SwiftUI
 
+/// The style a coordinator should be presented in when transitioning to it.
+public enum PresentationStyle {
+    case push
+    case present(modalInPresentation: Bool)
+    case fullscreenModal
+}
+
 public protocol Coordinator: AnyObject {
 
     /// The type of the ``view`` of the ``Coordinator``.
@@ -13,9 +20,25 @@ public protocol Coordinator: AnyObject {
     var navigator: Navigator { get }
 }
 
-/// The style a coordinator should be presented in when transitioning to it.
-public enum PresentationStyle {
-    case push
-    case present(modalInPresentation: Bool)
-    case fullscreenModal
+extension Coordinator {
+
+    public func transition<C: Coordinator>(_ presentationStyle: PresentationStyle = .push, to: (Navigator) -> C) {
+        switch presentationStyle {
+        case .push: navigator.push(to(navigator))
+        case .present(let isModalInPresentation):
+            let navigationController = UINavigationController()
+            navigationController.isModalInPresentation = isModalInPresentation
+
+            let navigator = Navigator(navigationController: navigationController)
+            self.navigator.present(to(navigator))
+        case .fullscreenModal:
+            let navigationController = UINavigationController()
+            let navigator = Navigator(navigationController: navigationController)
+            self.navigator.presentFullscreen(to(navigator))
+        }
+    }
+
+    public func dismiss() {
+        navigator.dismiss(self)
+    }
 }

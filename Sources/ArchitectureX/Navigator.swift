@@ -37,23 +37,3 @@ public struct Navigator {
         coordinator.navigator.navigationController.dismiss(animated: true, completion: nil)
     }
 }
-
-extension Navigator {
-
-    public func transition<C: Coordinator>(_ presentationStyle: PresentationStyle = .push, to: (Navigator) -> C) {
-        switch presentationStyle {
-        case .push: push(to(self))
-        case .present(let isModalInPresentation):
-            let navigationController = UINavigationController()
-            navigationController.isModalInPresentation = isModalInPresentation
-
-            let navigator = Navigator(navigationController: navigationController)
-            present(to(navigator))
-        case .fullscreenModal:
-            let navigationController = UINavigationController()
-            let navigator = Navigator(navigationController: navigationController)
-            presentFullscreen(to(navigator))
-        }
-    }
-}
-
