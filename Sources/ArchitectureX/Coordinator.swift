@@ -8,7 +8,7 @@ public enum PresentationStyle {
     case fullscreenModal
 }
 
-public protocol Coordinator: AnyObject {
+public protocol Coordinator {
 
     /// The type of the ``view`` of the ``Coordinator``.
     associatedtype ViewType: View
