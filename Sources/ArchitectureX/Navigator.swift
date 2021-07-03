@@ -2,8 +2,9 @@ import Foundation
 import SwiftUI
 import UIKit
 
-public class Navigator {
-    public var navigationController: UINavigationController
+public struct Navigator {
+
+    public unowned let navigationController: UINavigationController
 
     public init(navigationController: UINavigationController, prefersLargeTitles: Bool = true) {
         self.navigationController = navigationController
