@@ -12,6 +12,11 @@ public struct Navigator {
         navigationController.navigationBar.prefersLargeTitles = prefersLargeTitles
     }
 
+    func set<C: Coordinator>(_ coordinator: C, animated: Bool) {
+        let hostedCoordinatorView = UIHostingController(rootView: coordinator.view)
+        navigationController.setViewControllers([hostedCoordinatorView], animated: animated)
+    }
+
     func push<C: Coordinator>(_ coordinator: C) {
         let hostedCoordinatorView = UIHostingController(rootView: coordinator.view)
         navigationController.show(hostedCoordinatorView, sender: nil)

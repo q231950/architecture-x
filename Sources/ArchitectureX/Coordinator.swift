@@ -6,9 +6,10 @@ public enum PresentationStyle {
     case push
     case present(modalInPresentation: Bool)
     case fullscreenModal
+    case replace
 }
 
-public protocol Coordinator {
+public protocol Coordinator: AnyObject {
 
     /// The type of the ``view`` of the ``Coordinator``.
     associatedtype ViewType: View
@@ -35,6 +36,8 @@ extension Coordinator {
             let navigationController = UINavigationController()
             let navigator = Navigator(navigationController: navigationController)
             self.navigator.presentFullscreen(to(navigator))
+        case .replace:
+            navigator.set(to(navigator), animated: false)
         }
     }
 
