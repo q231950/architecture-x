@@ -1,3 +1,3 @@
-# Architecture
+# ArchitectureX
 
-A description of this package.
+A _works well for me_ approach to SwiftUI navigation.

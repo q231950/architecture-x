@@ -22,12 +22,11 @@ public protocol Coordinator: AnyObject {
     var router: Router? { get set }
 }
 
-/// some more
 extension Coordinator {
 
     /// The view of a Coordinator.
     ///
-    /// This only needs to be exposed publicly as there is not MainCoordinator.
+    /// This only needs to be exposed publicly as there is no MainCoordinator.
     public var view: some View {
         contentView
             .coordinated(coordinator: self)
