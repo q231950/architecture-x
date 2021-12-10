@@ -46,7 +46,7 @@ extension Coordinator {
         case .push:
             router?.navigationLinkDestination = AnyView(child.view)
             router?.isNavigationLinkActive = true
-        case .present(let isModalInPresentation):
+        case .present:
             router?.sheet = AnyView(child.view.containInNavigation)
             router?.showingSheet = true
             break
